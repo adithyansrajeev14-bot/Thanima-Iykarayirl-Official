@@ -115,7 +115,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <span>4.9★</span>
                   <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
                 </div>
-                <div className="text-[11px] text-slate-400">128+ Google Reviews</div>
+                <div className="text-[11px] text-slate-400">153 Google Reviews</div>
               </div>
 
               <div>

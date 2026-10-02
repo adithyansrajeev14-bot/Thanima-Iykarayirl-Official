@@ -207,7 +207,7 @@ export const OfficialNavbar: React.FC<OfficialNavbarProps> = ({
           >
             <span>Google Reviews</span>
             <span className="text-xs bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full">
-              4.9★ (128+ Reviews)
+              4.9★ (153 Reviews)
             </span>
           </button>
           <button

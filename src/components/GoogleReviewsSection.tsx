@@ -212,7 +212,7 @@ export const GoogleReviewsSection: React.FC<GoogleReviewsSectionProps> = () => {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex items-center justify-center gap-2 mb-8 text-xs">
+        <div className="flex items-center justify-center gap-2 mb-8 text-xs flex-wrap">
           <button
             onClick={() => setFilterRating('ALL')}
             className={`px-3.5 py-1.5 rounded-full font-bold transition cursor-pointer ${
@@ -221,7 +221,7 @@ export const GoogleReviewsSection: React.FC<GoogleReviewsSectionProps> = () => {
                 : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
             }`}
           >
-            All Reviews ({reviews.length})
+            Featured Student Reviews ({reviews.length})
           </button>
           <button
             onClick={() => setFilterRating('5')}
@@ -232,8 +232,18 @@ export const GoogleReviewsSection: React.FC<GoogleReviewsSectionProps> = () => {
             }`}
           >
             <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-            <span>5-Star Experiences</span>
+            <span>5-Star Ratings</span>
           </button>
+          <a
+            href={GOOGLE_MAPS_REVIEWS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="px-3.5 py-1.5 rounded-full font-bold transition cursor-pointer flex items-center gap-1.5 bg-white hover:bg-blue-50 text-blue-700 border border-blue-200 shadow-sm"
+          >
+            <MapPin className="w-3 h-3 text-rose-600" />
+            <span>All 153 on Google Maps</span>
+            <ExternalLink className="w-3 h-3 text-slate-400" />
+          </a>
         </div>
 
         {/* Reviews Grid */}
@@ -311,12 +321,46 @@ export const GoogleReviewsSection: React.FC<GoogleReviewsSectionProps> = () => {
               <span>
                 {showAllReviews
                   ? 'Show Fewer Reviews'
-                  : `View More Reviews (Show All ${filteredReviews.length} Verified Student Experiences)`}
+                  : `Show All ${filteredReviews.length} Featured Experiences on this Page`}
               </span>
               <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showAllReviews ? 'rotate-180' : ''}`} />
             </button>
           </div>
         )}
+
+        {/* Call to Action: View All 153 Reviews on Google Maps */}
+        <div className="mt-12 bg-white border border-blue-100 rounded-3xl p-6 sm:p-8 text-center max-w-2xl mx-auto shadow-sm">
+          <div className="flex justify-center items-center gap-1 text-amber-400 mb-2">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+            ))}
+          </div>
+          <h4 className="text-base sm:text-lg font-black text-slate-900">
+            Read all 153+ Verified Reviews on Google Maps
+          </h4>
+          <p className="text-xs text-slate-600 mt-1 max-w-lg mx-auto">
+            Thanima Iykkarayil Motor Driving School has trained thousands of confident drivers in Mallappally with an outstanding 4.9★ rating on Google Maps.
+          </p>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={GOOGLE_MAPS_REVIEWS_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs shadow-md transition transform active:scale-95"
+            >
+              <MapPin className="w-4 h-4 text-rose-300" />
+              <span>Open All 153 Reviews on Google Maps</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+            <button
+              onClick={() => setShowAddModal(true)}
+              className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition cursor-pointer"
+            >
+              <PlusCircle className="w-4 h-4 text-blue-600" />
+              <span>Share Student Review</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Add Review Modal */}

@@ -362,6 +362,150 @@ const DEFAULT_REVIEWS: GoogleReview[] = [
     likes: 14,
     highlight: 'Patient instructors who never lose temper.',
     batch: 'LMV Car + Bike'
+  },
+  {
+    id: 'rev_13',
+    authorName: 'Joby K. Varghese',
+    rating: 5,
+    relativeTime: '5 months ago',
+    date: '2026-04-02',
+    text: 'The best driving school in Mallappally and Pathanamthitta district. Cleared Mallappally sub-RTO test on the first chance without any fear. Thank you Arun and team!',
+    verified: true,
+    likes: 15,
+    highlight: 'Cleared Mallappally Sub-RTO test on the first chance!',
+    batch: 'LMV Car'
+  },
+  {
+    id: 'rev_14',
+    authorName: 'Deepa S. Pillai',
+    rating: 5,
+    relativeTime: '6 months ago',
+    date: '2026-03-19',
+    text: 'As a complete beginner who never touched a steering wheel, the instructors made me feel so comfortable. Completed training and received my smart card driving license.',
+    verified: true,
+    likes: 22,
+    highlight: 'Made a complete beginner feel confident and relaxed.',
+    batch: 'LMV Four Wheeler'
+  },
+  {
+    id: 'rev_15',
+    authorName: 'Alex Abraham',
+    rating: 5,
+    relativeTime: '6 months ago',
+    date: '2026-03-05',
+    text: 'Excellent private ground training for the reverse H track. The mirror alignment and step-by-step guidance made the test day feel like regular practice.',
+    verified: true,
+    likes: 11,
+    highlight: 'Private ground H-track practice makes test day easy.',
+    batch: 'LMV + MCWG Combo'
+  },
+  {
+    id: 'rev_16',
+    authorName: 'Remya Manoj',
+    rating: 5,
+    relativeTime: '7 months ago',
+    date: '2026-02-18',
+    text: 'Staff is very polite and supportive. They took care of Sarathi portal registration, learner slot booking and test date without any trouble.',
+    verified: true,
+    likes: 9,
+    highlight: 'Complete Sarathi portal and RTO slot assistance.',
+    batch: 'Scooter MCWOG'
+  },
+  {
+    id: 'rev_17',
+    authorName: 'Vishnu Prasad',
+    rating: 5,
+    relativeTime: '7 months ago',
+    date: '2026-02-04',
+    text: 'Took bike and car combo pack. Both vehicles are in brand new condition with proper dual safety control. 10/10 driving school in Mallappally.',
+    verified: true,
+    likes: 13,
+    highlight: 'Top condition vehicles with dual safety control.',
+    batch: 'LMV Car + MCWG Bike'
+  },
+  {
+    id: 'rev_18',
+    authorName: 'Annamma Thomas',
+    rating: 5,
+    relativeTime: '8 months ago',
+    date: '2026-01-22',
+    text: 'Learned driving after retirement at age 58. Their patience, respect and kind behavior is something you rarely find. God bless Thanima Iykarayil MDS!',
+    verified: true,
+    likes: 34,
+    highlight: 'Learned driving at age 58 with exceptional patient coaching.',
+    batch: 'LMV Car'
+  },
+  {
+    id: 'rev_19',
+    authorName: 'Midhun Mohan',
+    rating: 5,
+    relativeTime: '8 months ago',
+    date: '2026-01-10',
+    text: 'Cleared H-test and Road test on first attempt. Arun sir explained the clutch friction point and reverse steering formula very simply.',
+    verified: true,
+    likes: 17,
+    highlight: 'Clutch friction point & reverse steering formula explained simply.',
+    batch: 'LMV Car'
+  },
+  {
+    id: 'rev_20',
+    authorName: 'Shobha R.',
+    rating: 5,
+    relativeTime: '9 months ago',
+    date: '2025-12-19',
+    text: 'Women can join without any hesitation. Very safe, respectful and friendly coaching environment. Today I drive my own car to office.',
+    verified: true,
+    likes: 27,
+    highlight: '100% safe, respectful and supportive environment for women.',
+    batch: 'LMV Four Wheeler'
+  },
+  {
+    id: 'rev_21',
+    authorName: 'Binu Varghese',
+    rating: 5,
+    relativeTime: '9 months ago',
+    date: '2025-12-02',
+    text: 'Affordable fee structure with installment option. Getting official digital receipts on WhatsApp instantly is very transparent and reliable.',
+    verified: true,
+    likes: 8,
+    highlight: 'Transparent fees with installment options and digital receipts.',
+    batch: 'LMV Car'
+  },
+  {
+    id: 'rev_22',
+    authorName: 'Rakesh R. Nair',
+    rating: 5,
+    relativeTime: '10 months ago',
+    date: '2025-11-14',
+    text: 'Slope start (hill practice) and overtaking lessons were top class. Now I have zero fear while driving on high range Kerala roads.',
+    verified: true,
+    likes: 19,
+    highlight: 'Excellent hill-slope practice & overtaking road lessons.',
+    batch: 'LMV Refresher & Highway'
+  },
+  {
+    id: 'rev_23',
+    authorName: 'Lijo Philip',
+    rating: 5,
+    relativeTime: '11 months ago',
+    date: '2025-10-28',
+    text: 'Best driving school near Chengaroor and Mallappally. Clear instructions, genuine dedication and 100% test success support.',
+    verified: true,
+    likes: 12,
+    highlight: 'Genuine dedication and 100% test success support.',
+    batch: 'LMV Car + Bike'
+  },
+  {
+    id: 'rev_24',
+    authorName: 'Sandra Susan',
+    rating: 5,
+    relativeTime: '11 months ago',
+    date: '2025-10-15',
+    text: 'I was very nervous behind the wheel initially, but within two weeks I was smoothly shifting gears and reversing like a pro. Thank you so much!',
+    verified: true,
+    likes: 16,
+    highlight: 'Transformed nervous beginner into a confident pro in two weeks.',
+    batch: 'LMV Car'
   }
 ];
 
@@ -478,7 +622,7 @@ function ensureDatabase(): DatabaseSchema {
       changed = true;
     }
 
-    if (!parsed.reviews || parsed.reviews.length < 8) {
+    if (!parsed.reviews || parsed.reviews.length < 24) {
       parsed.reviews = DEFAULT_REVIEWS;
       parsed.lastReviewSync = new Date().toISOString();
       changed = true;
