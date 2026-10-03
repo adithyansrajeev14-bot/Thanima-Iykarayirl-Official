@@ -69,6 +69,7 @@ export interface SchoolSettings {
   rtoOffice: string;
   terms: string[];
   googleMapsUrl?: string;
+  allowReceiptDeletion?: boolean;
   customImages?: CustomWebsiteImages;
 }
 

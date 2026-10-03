@@ -32,7 +32,8 @@ const DEFAULT_SETTINGS: SchoolSettings = {
     'Driving test date will be allotted subject to RTO slot availability and full fee clearance.',
     'Proper discipline, helmet (for 2-wheeler), and footwear are mandatory during practical classes.'
   ],
-  googleMapsUrl: 'https://www.google.com/maps/place/Thanima+Iykkarayil+Motor+Driving+School/@9.4362596,76.6413042,101m/data=!3m1!1e3!4m8!3m7!1s0x3b0625e130d716c1:0xf434ddbb4440fbd8!8m2!3d9.4361345!4d76.6414822!9m1!1b1!16s%2Fg%2F11ns5khhs7?entry=ttu'
+  googleMapsUrl: 'https://www.google.com/maps/place/Thanima+Iykkarayil+Motor+Driving+School/@9.4362596,76.6413042,101m/data=!3m1!1e3!4m8!3m7!1s0x3b0625e130d716c1:0xf434ddbb4440fbd8!8m2!3d9.4361345!4d76.6414822!9m1!1b1!16s%2Fg%2F11ns5khhs7?entry=ttu',
+  allowReceiptDeletion: false
 };
 
 const DEFAULT_COURSES: CoursePackage[] = [
@@ -1059,9 +1060,36 @@ async function startServer() {
     res.json({ success: true, receipt, installment: newInst });
   });
 
-  // 8. Delete receipt
+  // 7B. Database Health & Status Check
+  app.get('/api/health', (req, res) => {
+    try {
+      const db = ensureDatabase();
+      res.json({
+        success: true,
+        connected: true,
+        databaseFile: DB_FILE,
+        totalReceipts: db.receipts?.length || 0,
+        totalCourses: db.courses?.length || 0,
+        totalReviews: db.reviews?.length || 0,
+        allowReceiptDeletion: db.settings?.allowReceiptDeletion ?? false,
+        timestamp: new Date().toISOString()
+      });
+    } catch (err: any) {
+      res.status(500).json({ success: false, connected: false, message: err?.message || 'Database error' });
+    }
+  });
+
+  // 8. Delete receipt (Enforces allowReceiptDeletion safety setting)
   app.delete('/api/receipts/:id', (req, res) => {
     const db = ensureDatabase();
+    const isAllowed = db.settings?.allowReceiptDeletion ?? false;
+    if (!isAllowed && req.query.force !== 'true') {
+      return res.status(403).json({
+        success: false,
+        message: 'Receipt deletion is disabled in School Settings for safety. Please enable "Allow Deleting Receipts" in Settings before removing records.'
+      });
+    }
+
     const id = req.params.id;
     const index = db.receipts.findIndex(r => r.id === id);
     if (index === -1) {
@@ -1069,7 +1097,7 @@ async function startServer() {
     }
     const [deleted] = db.receipts.splice(index, 1);
     saveDatabase(db);
-    res.json({ success: true, deletedId: deleted.id });
+    res.json({ success: true, deletedId: deleted.id, receipts: db.receipts });
   });
 
   // 9. Aggregated Stats

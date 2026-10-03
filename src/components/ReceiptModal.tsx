@@ -14,7 +14,8 @@ import {
   MessageSquare,
   Globe,
   ExternalLink,
-  Laptop
+  Laptop,
+  Trash2
 } from 'lucide-react';
 
 interface ReceiptModalProps {
@@ -23,6 +24,7 @@ interface ReceiptModalProps {
   isOpen: boolean;
   onClose: () => void;
   onOpenInstallmentModal?: (receipt: Receipt) => void;
+  onDeleteReceipt?: (receipt: Receipt) => void;
 }
 
 export const ReceiptModal: React.FC<ReceiptModalProps> = ({
@@ -31,6 +33,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({
   isOpen,
   onClose,
   onOpenInstallmentModal,
+  onDeleteReceipt,
 }) => {
   const [isExportingPdf, setIsExportingPdf] = useState(false);
   const [copiedText, setCopiedText] = useState(false);
@@ -186,6 +189,21 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({
               <Printer className="w-3.5 h-3.5 text-slate-600" />
               <span>Print</span>
             </button>
+
+            {onDeleteReceipt && (
+              <button
+                onClick={() => onDeleteReceipt(receipt)}
+                title={settings.allowReceiptDeletion ? "Delete this receipt" : "Receipt deletion is locked in School Settings"}
+                className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg transition border shadow-sm cursor-pointer ${
+                  settings.allowReceiptDeletion
+                    ? 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200'
+                    : 'bg-slate-50 text-slate-400 border-slate-200 hover:text-amber-700 hover:bg-amber-50'
+                }`}
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Delete</span>
+              </button>
+            )}
           </div>
         </div>
 

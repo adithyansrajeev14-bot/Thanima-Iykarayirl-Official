@@ -42,47 +42,6 @@
       "status": "Active"
     },
     {
-      "id": "rec_1790905193037",
-      "receiptNumber": "TIMDS-2026-1004",
-      "createdAt": "2026-10-02T01:39:53.037Z",
-      "date": "2026-10-02",
-      "studentName": "Adithyan    S Rajeeev",
-      "phone": "9645051054",
-      "email": "adithyansrajeev14@gmail.com",
-      "address": "",
-      "age": 20,
-      "gender": "Male",
-      "bloodGroup": "B+",
-      "courseId": "course-combo",
-      "courseName": "Combo Pack (LMV Car + MCWG Bike)",
-      "vehicleType": "Car (Manual) + Motorcycle with Gear",
-      "batchTiming": "06:30 AM - 07:30 AM (Morning)",
-      "learningLicenseNumber": "",
-      "applicationNo": "",
-      "rtoOffice": "Sub RTO Mallappally (KL-28)",
-      "instructorName": "Arun Iykarayil",
-      "courseFee": 11500,
-      "rtoGovtFee": 1500,
-      "discount": 0,
-      "totalAmount": 13000,
-      "amountPaid": 13000,
-      "balanceAmount": 0,
-      "paymentStatus": "PAID",
-      "installments": [
-        {
-          "id": "inst_1790905193037",
-          "date": "2026-10-02",
-          "amount": 13000,
-          "paymentMode": "GPay / UPI",
-          "referenceNo": "",
-          "notes": "Admission registration",
-          "receivedBy": "Staff Desk"
-        }
-      ],
-      "notes": "Admission registration",
-      "status": "Active"
-    },
-    {
       "id": "rec_1001",
       "receiptNumber": "TIMDS-2026-0001",
       "createdAt": "2026-09-28T09:30:00.000Z",
@@ -282,7 +241,8 @@
       "Driving test date will be allotted subject to RTO slot availability and full fee clearance.",
       "Proper discipline, helmet (for 2-wheeler), and footwear are mandatory during practical classes."
     ],
-    "googleMapsUrl": "https://www.google.com/maps/place/Thanima+Iykkarayil+Motor+Driving+School/@9.4362596,76.6413042,101m/data=!3m1!1e3!4m8!3m7!1s0x3b0625e130d716c1:0xf434ddbb4440fbd8!8m2!3d9.4361345!4d76.6414822!9m1!1b1!16s%2Fg%2F11ns5khhs7?entry=ttu"
+    "googleMapsUrl": "https://www.google.com/maps/place/Thanima+Iykkarayil+Motor+Driving+School/@9.4362596,76.6413042,101m/data=!3m1!1e3!4m8!3m7!1s0x3b0625e130d716c1:0xf434ddbb4440fbd8!8m2!3d9.4361345!4d76.6414822!9m1!1b1!16s%2Fg%2F11ns5khhs7?entry=ttu",
+    "allowReceiptDeletion": false
   },
   "counter": 1006,
   "reviews": [

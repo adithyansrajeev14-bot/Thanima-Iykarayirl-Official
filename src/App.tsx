@@ -13,6 +13,7 @@ import { CustomerBillPage } from './components/CustomerBillPage';
 import { BillLookupModal } from './components/BillLookupModal';
 import { ReceiptModal } from './components/ReceiptModal';
 import { InstallmentModal } from './components/InstallmentModal';
+import { DeleteReceiptModal } from './components/DeleteReceiptModal';
 import { LearnerBadge } from './components/LearnerBadge';
 import { Phone, MapPin, Search, MessageSquare, AlertCircle } from 'lucide-react';
 
@@ -148,6 +149,7 @@ export default function App() {
   const [showLookupModal, setShowLookupModal] = useState(false);
   const [activeReceiptModal, setActiveReceiptModal] = useState<Receipt | null>(null);
   const [activeInstallmentModal, setActiveInstallmentModal] = useState<Receipt | null>(null);
+  const [receiptToDeleteFromApp, setReceiptToDeleteFromApp] = useState<Receipt | null>(null);
 
   // Check URL route for secret /adminmode or direct /bill/:id extension
   const checkUrlRoute = useCallback(async () => {
@@ -231,30 +233,60 @@ export default function App() {
     window.history.pushState(null, '', '/');
   };
 
-  // Fetch initial data
+  // Fetch initial data with resilient local storage caching
   const fetchData = async () => {
     setLoading(true);
     try {
       const [resReceipts, resCourses, resSettings] = await Promise.all([
-        fetch('/api/receipts'),
-        fetch('/api/courses'),
-        fetch('/api/settings'),
+        fetch('/api/receipts').catch(() => null),
+        fetch('/api/courses').catch(() => null),
+        fetch('/api/settings').catch(() => null),
       ]);
 
-      if (resReceipts.ok) {
+      if (resReceipts && resReceipts.ok) {
         const d = await resReceipts.json();
-        if (d.receipts) setReceipts(d.receipts);
+        if (d.receipts) {
+          setReceipts(d.receipts);
+          try { localStorage.setItem('timds_receipts', JSON.stringify(d.receipts)); } catch (e) {}
+        }
+      } else {
+        const cached = localStorage.getItem('timds_receipts');
+        if (cached) {
+          try { setReceipts(JSON.parse(cached)); } catch (e) {}
+        }
       }
-      if (resCourses.ok) {
+
+      if (resCourses && resCourses.ok) {
         const d = await resCourses.json();
-        if (d.courses) setCourses(d.courses);
+        if (d.courses) {
+          setCourses(d.courses);
+          try { localStorage.setItem('timds_courses', JSON.stringify(d.courses)); } catch (e) {}
+        }
+      } else {
+        const cached = localStorage.getItem('timds_courses');
+        if (cached) {
+          try { setCourses(JSON.parse(cached)); } catch (e) {}
+        }
       }
-      if (resSettings.ok) {
+
+      if (resSettings && resSettings.ok) {
         const d = await resSettings.json();
-        if (d.settings) setSettings(d.settings);
+        if (d.settings) {
+          setSettings(d.settings);
+          try { localStorage.setItem('timds_settings', JSON.stringify(d.settings)); } catch (e) {}
+        }
+      } else {
+        const cached = localStorage.getItem('timds_settings');
+        if (cached) {
+          try { setSettings(JSON.parse(cached)); } catch (e) {}
+        }
       }
     } catch (err) {
-      console.warn('Backend API connection warning:', err);
+      console.warn('Backend API connection warning, using cached state:', err);
+      const cached = localStorage.getItem('timds_receipts');
+      if (cached) {
+        try { setReceipts(JSON.parse(cached)); } catch (e) {}
+      }
     } finally {
       setLoading(false);
     }
@@ -265,14 +297,20 @@ export default function App() {
   }, []);
 
   const handleReceiptCreated = (newReceipt: Receipt) => {
-    setReceipts(prev => [newReceipt, ...prev]);
+    setReceipts(prev => {
+      const updated = [newReceipt, ...prev];
+      try { localStorage.setItem('timds_receipts', JSON.stringify(updated)); } catch (e) {}
+      return updated;
+    });
     setActiveReceiptModal(newReceipt);
   };
 
   const handlePaymentAdded = (updatedReceipt: Receipt) => {
-    setReceipts(prev =>
-      prev.map(r => (r.id === updatedReceipt.id ? updatedReceipt : r))
-    );
+    setReceipts(prev => {
+      const updated = prev.map(r => (r.id === updatedReceipt.id ? updatedReceipt : r));
+      try { localStorage.setItem('timds_receipts', JSON.stringify(updated)); } catch (e) {}
+      return updated;
+    });
     if (activeReceiptModal && activeReceiptModal.id === updatedReceipt.id) {
       setActiveReceiptModal(updatedReceipt);
     }
@@ -471,6 +509,32 @@ export default function App() {
           onOpenInstallmentModal={(r) => {
             setActiveReceiptModal(null);
             setActiveInstallmentModal(r);
+          }}
+          onDeleteReceipt={(r) => {
+            setActiveReceiptModal(null);
+            setReceiptToDeleteFromApp(r);
+          }}
+        />
+      )}
+
+      {/* Delete Receipt Confirmation Modal */}
+      {receiptToDeleteFromApp && (
+        <DeleteReceiptModal
+          receipt={receiptToDeleteFromApp}
+          isOpen={Boolean(receiptToDeleteFromApp)}
+          allowDeletion={Boolean(settings.allowReceiptDeletion)}
+          onClose={() => setReceiptToDeleteFromApp(null)}
+          onSuccess={(deletedId) => {
+            setReceipts(prev => {
+              const updated = prev.filter(r => r.id !== deletedId);
+              try { localStorage.setItem('timds_receipts', JSON.stringify(updated)); } catch (e) {}
+              return updated;
+            });
+            setReceiptToDeleteFromApp(null);
+            fetchData();
+          }}
+          onOpenSettings={() => {
+            handleNavigateView('admin');
           }}
         />
       )}
