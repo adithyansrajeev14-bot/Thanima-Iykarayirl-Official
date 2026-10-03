@@ -224,9 +224,9 @@ export const AdminMode: React.FC<AdminModeProps> = ({
 
   return (
     <div className="w-full max-w-7xl mx-auto space-y-8 animate-in fade-in duration-200">
-      {/* Admin Mode Top Header */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900 via-blue-800 to-slate-900 p-6 md:p-8 text-white shadow-lg border border-blue-700/40">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Admin Mode Top Header in Light Blue Glass / Deep Sky Styling */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-sky-950 via-slate-900 to-sky-950 p-6 md:p-8 text-white shadow-lg border border-sky-800/60">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-sky-400/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
@@ -240,7 +240,7 @@ export const AdminMode: React.FC<AdminModeProps> = ({
                 {settings.name} — Billing Ledger
               </h1>
               <div className="flex items-center gap-3 mt-1 flex-wrap">
-                <p className="text-xs md:text-sm text-blue-200">
+                <p className="text-xs md:text-sm text-sky-200">
                   Accounts, Installments & Driving School Administration
                 </p>
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">

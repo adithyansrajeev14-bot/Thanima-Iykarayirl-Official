@@ -7,20 +7,20 @@ interface LearnerBadgeProps {
 
 export const LearnerBadge: React.FC<LearnerBadgeProps> = ({ size = 'md', className = '' }) => {
   const sizeClasses = {
-    sm: 'w-8 h-8 text-xl border-2',
-    md: 'w-11 h-11 text-2xl border-[3px]',
-    lg: 'w-16 h-16 text-3xl border-4',
-    xl: 'w-24 h-24 text-5xl border-[5px]'
+    sm: 'w-7 h-7 text-base rounded border-2',
+    md: 'w-10 h-10 text-2xl rounded-md border-2',
+    lg: 'w-14 h-14 text-3xl rounded-lg border-[3px]',
+    xl: 'w-20 h-20 text-4xl rounded-xl border-4'
   };
 
   return (
     <div
-      className={`inline-flex items-center justify-center font-black rounded-full bg-white border-blue-600 text-red-600 shadow-md select-none flex-shrink-0 transition-transform hover:scale-105 ${sizeClasses[size]} ${className}`}
+      className={`inline-flex items-center justify-center font-black bg-white border-red-600 text-red-600 shadow-xs select-none shrink-0 ${sizeClasses[size]} ${className}`}
       style={{
-        fontFamily: "'Arial Black', 'Impact', sans-serif",
-        boxShadow: '0 4px 12px rgba(220, 38, 38, 0.25), 0 2px 6px rgba(37, 99, 235, 0.3)'
+        fontFamily: "'Arial Black', 'Helvetica Neue', Impact, sans-serif",
       }}
-      title="Motor Driving School Official Learner's Mark"
+      title="Motor Vehicles Department Official Learner Sign"
+      aria-label="Official Motor Driving School Learner Symbol"
     >
       L
     </div>

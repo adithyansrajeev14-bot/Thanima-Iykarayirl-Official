@@ -367,7 +367,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col antialiased">
+    <div className="min-h-screen bg-gradient-to-b from-sky-50/70 via-blue-50/30 to-sky-50/60 text-slate-800 flex flex-col antialiased">
       {/* Top Official Navbar */}
       <OfficialNavbar
         settings={settings}
@@ -445,45 +445,106 @@ export default function App() {
         )}
       </main>
 
-      {/* Public Footer */}
-      <footer className="mt-auto border-t border-slate-200 bg-white py-8 text-xs text-slate-600">
+      {/* Public Institutional Footer with Deep Sky Glass Styling */}
+      <footer className="mt-auto border-t border-sky-800/80 bg-gradient-to-br from-sky-950 via-slate-900 to-sky-950 text-sky-200 py-12 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <LearnerBadge size="sm" />
-              <div>
-                <strong className="text-slate-900 font-extrabold">{settings.name}</strong>
-                <p className="text-slate-500 text-[11px] mt-0.5">
-                  "{settings.tagline}" • Govt. Recognized MDS • Sub RTO Mallappally (KL-28)
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-sky-900/60">
+            {/* Col 1: Institute Info */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <LearnerBadge size="sm" />
+                <span className="font-extrabold text-white text-sm tracking-wide">
+                  THANIMA IYKARAYIL MDS
+                </span>
+              </div>
+              <p className="text-sky-300/80 text-xs leading-relaxed">
+                Govt. Recognized Motor Driving School affiliated for Kerala Motor Vehicles Department driving tests at Sub RTO Mallappally (KL-28).
+              </p>
+              <div className="text-[11px] text-amber-300 font-medium">
+                Chief Instructor: Arun Iykarayil
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-6 text-slate-600">
-              <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-blue-600" />
-                <span>{settings.address}</span>
-              </span>
-              <span className="flex items-center gap-1.5 font-bold text-slate-800">
-                <Phone className="w-3.5 h-3.5 text-blue-600" />
-                <span>{settings.primaryPhone} / {settings.secondaryPhone}</span>
-              </span>
-              <button
-                onClick={() => setShowLookupModal(true)}
-                className="text-blue-700 hover:text-blue-900 font-semibold underline cursor-pointer"
-              >
-                Find My Digital Bill
-              </button>
+            {/* Col 2: Navigation Links */}
+            <div>
+              <div className="text-white font-bold text-xs uppercase tracking-wider mb-3">
+                Prospectus & Links
+              </div>
+              <ul className="space-y-2 text-sky-300/80">
+                <li>
+                  <a href="#about" className="hover:text-white transition">About School & Instructors</a>
+                </li>
+                <li>
+                  <a href="#courses" className="hover:text-white transition">Courses & Fee Tariffs</a>
+                </li>
+                <li>
+                  <a href="#rto-guidelines" className="hover:text-white transition">Sub-RTO Test Procedures</a>
+                </li>
+                <li>
+                  <a href="#gallery" className="hover:text-white transition">Private Training Ground (H & 8)</a>
+                </li>
+                <li>
+                  <a href="#reviews" className="hover:text-white transition">Google Maps Reviews (4.9★)</a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Col 3: Jurisdiction & Location */}
+            <div>
+              <div className="text-white font-bold text-xs uppercase tracking-wider mb-3">
+                Ground & Jurisdiction
+              </div>
+              <div className="space-y-2 text-sky-300/80">
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                  <span>{settings.address}, {settings.city} - {settings.pincode}</span>
+                </div>
+                <div className="pt-1 text-[11px] text-sky-400/80">
+                  Jurisdiction: Mallappally, Chengaroor, Vennikulam, Anjilithanam, Kaviyoor, and nearby areas.
+                </div>
+              </div>
+            </div>
+
+            {/* Col 4: Student Services */}
+            <div>
+              <div className="text-white font-bold text-xs uppercase tracking-wider mb-3">
+                Student Desk
+              </div>
+              <ul className="space-y-2.5 text-sky-300/80">
+                <li>
+                  <button
+                    onClick={() => setShowLookupModal(true)}
+                    className="text-amber-300 hover:text-amber-200 font-semibold cursor-pointer underline text-left"
+                  >
+                    Download Official Fee Receipt / Bill
+                  </button>
+                </li>
+                <li className="flex items-center gap-1.5 text-sky-200">
+                  <Phone className="w-3.5 h-3.5 text-sky-400" />
+                  <span className="font-mono">{settings.primaryPhone} / {settings.secondaryPhone}</span>
+                </li>
+                <li>
+                  <a
+                    href={`https://wa.me/91${settings.whatsappPhone}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-semibold"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5" />
+                    <span>WhatsApp Admissions Desk</span>
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-2">
-            <span>
-              © {new Date().getFullYear()} {settings.name}. All Rights Reserved.
-            </span>
-            <span>
-              Kaduvakuzhy, Chengaroor P.O., Mallappally, Pathanamthitta Dist., Kerala.
-            </span>
+          <div className="mt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-sky-400/70 gap-4">
+            <div>
+              © {new Date().getFullYear()} {settings.name}. All Rights Reserved. Govt. Approved Motor Driving School.
+            </div>
+            <div className="text-sky-400/70 text-center md:text-right">
+              Learner's License is valid for 6 months. Driving test allotted subject to Sub-RTO Mallappally slot availability.
+            </div>
           </div>
         </div>
       </footer>

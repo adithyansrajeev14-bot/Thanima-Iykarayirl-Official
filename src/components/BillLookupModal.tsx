@@ -43,13 +43,13 @@ export const BillLookupModal: React.FC<BillLookupModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-700 via-blue-800 to-slate-900 text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-150">
+      <div className="bg-white/95 backdrop-blur-md border border-sky-300 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
+        {/* Header with Deep Sky Glass styling */}
+        <div className="flex items-center justify-between px-6 py-4 bg-sky-900 text-white">
           <div className="flex items-center gap-2">
-            <FileText className="w-5 h-5 text-blue-300" />
-            <h3 className="font-bold text-base">Find My Digital Bill & PDF</h3>
+            <FileText className="w-5 h-5 text-sky-300" />
+            <h3 className="font-bold text-base">Find My Fee Receipt & Bill</h3>
           </div>
           <button
             onClick={onClose}
@@ -67,20 +67,20 @@ export const BillLookupModal: React.FC<BillLookupModalProps> = ({
 
           <form onSubmit={handleSearch} className="flex gap-2">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
+              <Search className="w-4 h-4 absolute left-3 top-3 text-sky-600" />
               <input
                 type="text"
                 placeholder="Enter Mobile No. (e.g. 9562879877) or Bill #"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 autoFocus
-                className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-900 focus:bg-white focus:border-blue-600 focus:outline-none"
+                className="w-full pl-9 pr-3 py-2 bg-sky-50/50 border border-sky-200 rounded-xl text-xs text-slate-900 focus:bg-white focus:border-sky-500 focus:ring-2 focus:ring-sky-200/50 focus:outline-none"
               />
             </div>
             <button
               type="submit"
               disabled={loading || !query.trim()}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition disabled:opacity-50 cursor-pointer flex-shrink-0"
+              className="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl shadow-xs transition disabled:opacity-50 cursor-pointer shrink-0"
             >
               {loading ? 'Searching...' : 'Search'}
             </button>
@@ -88,7 +88,7 @@ export const BillLookupModal: React.FC<BillLookupModalProps> = ({
 
           {error && (
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 text-xs flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
@@ -101,7 +101,7 @@ export const BillLookupModal: React.FC<BillLookupModalProps> = ({
               </div>
 
               {results.length === 0 ? (
-                <div className="p-6 text-center text-slate-500 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                <div className="p-6 text-center text-slate-500 bg-sky-50/60 rounded-xl border border-sky-200 text-xs">
                   No billing record found for "{query}". Please verify the number or contact our office at 9562879877.
                 </div>
               ) : (
@@ -113,11 +113,11 @@ export const BillLookupModal: React.FC<BillLookupModalProps> = ({
                         onSelectReceipt(r);
                         onClose();
                       }}
-                      className="p-3.5 bg-slate-50 hover:bg-blue-50/60 border border-slate-200 hover:border-blue-400 rounded-xl transition cursor-pointer flex items-center justify-between group"
+                      className="p-3.5 bg-white/90 hover:bg-sky-50/80 border border-sky-200 hover:border-sky-400 rounded-xl transition cursor-pointer flex items-center justify-between group shadow-2xs"
                     >
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-xs font-bold text-blue-700 bg-blue-100/70 px-1.5 py-0.5 rounded">
+                          <span className="font-mono text-xs font-bold text-sky-800 bg-sky-100 px-1.5 py-0.5 rounded">
                             #{r.receiptNumber}
                           </span>
                           <span className="font-bold text-slate-900 text-xs">{r.studentName}</span>
@@ -136,7 +136,7 @@ export const BillLookupModal: React.FC<BillLookupModalProps> = ({
                             <div className="text-[10px] font-semibold text-emerald-700">Fully Settled</div>
                           )}
                         </div>
-                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition" />
+                        <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-0.5 transition" />
                       </div>
                     </div>
                   ))}

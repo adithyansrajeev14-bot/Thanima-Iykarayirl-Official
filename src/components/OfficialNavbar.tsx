@@ -7,10 +7,11 @@ import {
   MessageSquare,
   Menu,
   X,
-  Star,
-  Shield,
+  MapPin,
+  Clock,
   LogOut,
-  ChevronDown
+  ShieldCheck,
+  FileText
 } from 'lucide-react';
 
 interface OfficialNavbarProps {
@@ -45,7 +46,48 @@ export const OfficialNavbar: React.FC<OfficialNavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-sky-200/80 shadow-xs">
+      {/* Top Institutional Utility Bar with Ice Blue Glass Tint */}
+      <div className="bg-sky-950/90 text-sky-200 text-xs py-1.5 px-4 sm:px-6 lg:px-8 border-b border-sky-800/40 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-4 text-[11px] sm:text-xs">
+            <span className="flex items-center gap-1.5 text-sky-100">
+              <MapPin className="w-3.5 h-3.5 text-red-500" />
+              <span>Kaduvakuzhy, Chengaroor P.O., Mallappally (KL-28)</span>
+            </span>
+            <span className="hidden md:inline-block text-sky-700">|</span>
+            <span className="hidden md:flex items-center gap-1.5 text-sky-300">
+              <Clock className="w-3.5 h-3.5 text-amber-400" />
+              <span>Training: 06:30 AM – 06:30 PM (Mon – Sat)</span>
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4 text-[11px] sm:text-xs">
+            <a
+              href={`tel:${settings.primaryPhone}`}
+              className="text-amber-300 hover:text-white font-bold flex items-center gap-1 transition-colors"
+            >
+              <Phone className="w-3 h-3" />
+              <span className="font-mono">{settings.primaryPhone}</span>
+            </a>
+            <span className="text-sky-700">|</span>
+            <a
+              href={`tel:${settings.secondaryPhone}`}
+              className="text-sky-300 hover:text-white font-mono hidden xs:inline"
+            >
+              {settings.secondaryPhone}
+            </a>
+            <span className="text-sky-700 hidden xs:inline">|</span>
+            <span className="text-emerald-400 font-semibold flex items-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="hidden sm:inline">Govt. Recognized MDS</span>
+              <span className="sm:hidden">Govt. MDS</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Glass Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
         {/* Brand / Logo */}
         <div
@@ -55,129 +97,121 @@ export const OfficialNavbar: React.FC<OfficialNavbarProps> = ({
           }}
           className="flex items-center gap-3 cursor-pointer select-none group"
         >
-          <LearnerBadge size="md" className="group-hover:scale-105 transition-transform" />
+          <LearnerBadge size="md" />
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-black text-base sm:text-lg tracking-tight text-slate-900 group-hover:text-blue-700 transition-colors">
+              <span className="font-black text-lg sm:text-xl tracking-tight text-slate-900 group-hover:text-sky-700 transition-colors">
                 THANIMA IYKARAYIL
               </span>
-              <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-blue-100 text-blue-800 border border-blue-200">
+              <span className="bg-sky-600/90 text-white text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wider shadow-xs">
                 MDS
               </span>
             </div>
-            <div className="text-[11px] font-semibold text-blue-700 uppercase tracking-wider hidden xs:block">
-              Motor Driving School • Mallappally
+            <div className="text-[11px] font-semibold text-sky-800 uppercase tracking-wide">
+              Motor Driving School • Sub RTO Mallappally (KL-28)
             </div>
           </div>
         </div>
 
         {/* Desktop Navigation Links */}
         {currentView !== 'admin' && (
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-bold text-slate-600">
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-700">
             <button
               onClick={() => scrollToSection('top')}
-              className="hover:text-blue-700 transition cursor-pointer"
+              className="hover:text-sky-600 transition py-1 cursor-pointer"
             >
               Home
             </button>
             <button
-              onClick={() => scrollToSection('courses')}
-              className="hover:text-blue-700 transition cursor-pointer"
+              onClick={() => scrollToSection('about')}
+              className="hover:text-sky-600 transition py-1 cursor-pointer"
             >
-              Courses & Fees
+              About School
             </button>
             <button
-              onClick={() => scrollToSection('reviews')}
-              className="hover:text-blue-700 transition cursor-pointer flex items-center gap-1"
+              onClick={() => scrollToSection('courses')}
+              className="hover:text-sky-600 transition py-1 cursor-pointer"
             >
-              <span>Reviews</span>
-              <span className="text-[10px] font-extrabold bg-amber-100 text-amber-900 px-1.5 py-0.2 rounded-full flex items-center">
-                4.9★
-              </span>
+              Courses & Tariffs
+            </button>
+            <button
+              onClick={() => scrollToSection('rto-guidelines')}
+              className="hover:text-sky-600 transition py-1 cursor-pointer"
+            >
+              RTO Rules & Tests
             </button>
             <button
               onClick={() => scrollToSection('gallery')}
-              className="hover:text-blue-700 transition cursor-pointer"
+              className="hover:text-sky-600 transition py-1 cursor-pointer"
             >
-              Training Gallery
+              Ground & Fleet
             </button>
             <button
-              onClick={() => scrollToSection('about')}
-              className="hover:text-blue-700 transition cursor-pointer"
+              onClick={() => scrollToSection('reviews')}
+              className="hover:text-sky-600 transition py-1 cursor-pointer"
             >
-              Why Choose Us
+              Reviews (4.9★)
             </button>
             <button
               onClick={() => scrollToSection('contact')}
-              className="hover:text-blue-700 transition cursor-pointer"
+              className="hover:text-sky-600 transition py-1 cursor-pointer"
             >
-              Contact & Map
+              Contact Desk
             </button>
           </nav>
         )}
 
         {/* Action Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Admin Mode View Banner & Exit */}
           {currentView === 'admin' ? (
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold">
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                <span>Admin Panel Active</span>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-sky-50 border border-sky-300 text-sky-950 text-xs font-bold">
+                <span>Administrative Mode Active</span>
                 {pendingCount > 0 && (
-                  <span className="ml-1 bg-amber-200 text-amber-900 px-1.5 py-0.2 rounded-full text-[10px]">
-                    {pendingCount} dues
+                  <span className="ml-1 bg-amber-200 text-amber-950 px-1.5 py-0.5 rounded text-[10px]">
+                    {pendingCount} due
                   </span>
                 )}
               </div>
               <button
                 onClick={() => onNavigateView('website')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 transition cursor-pointer"
-                title="Exit Admin Panel"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white/80 hover:bg-white border border-sky-200 transition cursor-pointer"
+                title="Exit to Driving School Website"
               >
                 <LogOut className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Exit to Website</span>
               </button>
             </div>
           ) : (
-            /* Regular Customer/Visitor Actions */
             <div className="flex items-center gap-2">
-              {/* Find My Digital Bill Button */}
+              {/* Find My Digital Bill Button with Glass Style */}
               <button
                 onClick={onOpenLookup}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition cursor-pointer shadow-sm"
-                title="Search and download your driving school digital bill"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md text-xs font-bold text-sky-900 hover:text-sky-950 bg-sky-50/80 hover:bg-sky-100/90 border border-sky-200/90 backdrop-blur-xs transition cursor-pointer shadow-xs"
+                title="Search and download your official fee receipt / bill"
               >
-                <Search className="w-3.5 h-3.5 text-blue-600" />
-                <span className="hidden sm:inline">Find My Bill</span>
-                <span className="sm:hidden">Bill</span>
+                <FileText className="w-3.5 h-3.5 text-sky-700" />
+                <span className="hidden sm:inline">Download Fee Receipt</span>
+                <span className="sm:hidden">Receipt</span>
               </button>
-
-              {/* Direct Hotline Call */}
-              <a
-                href={`tel:${settings.primaryPhone}`}
-                className="hidden md:flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-blue-700 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-xl border border-slate-200 transition"
-              >
-                <Phone className="w-3.5 h-3.5 text-blue-600" />
-                <span className="font-mono">{settings.primaryPhone}</span>
-              </a>
 
               {/* Book Admission WhatsApp */}
               <a
-                href={`https://wa.me/91${settings.whatsappPhone}?text=${encodeURIComponent('Hi Thanima Iykarayil MDS, I want to book admission for driving class.')}`}
+                href={`https://wa.me/91${settings.whatsappPhone}?text=${encodeURIComponent('Hi Thanima Iykarayil MDS, I want to inquire about driving class admission and batch timings.')}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-sm transition"
+                className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-md transition shadow-xs"
               >
                 <MessageSquare className="w-3.5 h-3.5 fill-white" />
-                <span className="hidden sm:inline">Book Admission</span>
-                <span className="sm:hidden">Book</span>
+                <span className="hidden sm:inline">Admissions Inquiry</span>
+                <span className="sm:hidden">Inquire</span>
               </a>
 
               {/* Mobile Menu Hamburger */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition"
+                className="lg:hidden p-2 text-slate-700 hover:text-slate-900 rounded-md hover:bg-sky-50 border border-sky-200 transition"
+                aria-label="Toggle navigation menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -186,65 +220,71 @@ export const OfficialNavbar: React.FC<OfficialNavbarProps> = ({
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && currentView !== 'admin' && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-5 space-y-2 text-sm font-semibold text-slate-700 animate-in slide-in-from-top-2 duration-150">
+      {/* Mobile Menu Dropdown with Glass Styling */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-white/95 backdrop-blur-md border-b border-sky-200 px-4 pt-3 pb-5 space-y-2 text-sm font-semibold text-slate-700">
           <button
             onClick={() => scrollToSection('top')}
-            className="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-50 text-slate-900"
+            className="w-full text-left py-2 px-3 rounded hover:bg-sky-50 text-slate-900"
           >
             Home
           </button>
           <button
-            onClick={() => scrollToSection('courses')}
-            className="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-50 text-slate-900"
+            onClick={() => scrollToSection('about')}
+            className="w-full text-left py-2 px-3 rounded hover:bg-sky-50 text-slate-900"
           >
-            Courses & Fees
+            About School & Instructors
+          </button>
+          <button
+            onClick={() => scrollToSection('courses')}
+            className="w-full text-left py-2 px-3 rounded hover:bg-sky-50 text-slate-900"
+          >
+            Courses & Tariffs
+          </button>
+          <button
+            onClick={() => scrollToSection('rto-guidelines')}
+            className="w-full text-left py-2 px-3 rounded hover:bg-sky-50 text-slate-900"
+          >
+            RTO Rules & Test Preparation
+          </button>
+          <button
+            onClick={() => scrollToSection('gallery')}
+            className="w-full text-left py-2 px-3 rounded hover:bg-sky-50 text-slate-900"
+          >
+            Training Ground & Fleet
           </button>
           <button
             onClick={() => scrollToSection('reviews')}
-            className="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-50 text-slate-900 flex items-center justify-between"
+            className="w-full text-left py-2 px-3 rounded hover:bg-sky-50 text-slate-900 flex items-center justify-between"
           >
-            <span>Google Reviews</span>
-            <span className="text-xs bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full">
+            <span>Student Google Reviews</span>
+            <span className="text-xs bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded">
               4.9★ (153 Reviews)
             </span>
           </button>
           <button
-            onClick={() => scrollToSection('gallery')}
-            className="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-50 text-slate-900"
-          >
-            Training Facilities & Fleet
-          </button>
-          <button
-            onClick={() => scrollToSection('about')}
-            className="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-50 text-slate-900"
-          >
-            Why Choose Us
-          </button>
-          <button
             onClick={() => scrollToSection('contact')}
-            className="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-50 text-slate-900"
+            className="w-full text-left py-2 px-3 rounded hover:bg-sky-50 text-slate-900"
           >
-            Contact & Location Map
+            Contact Office & Map
           </button>
 
-          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+          <div className="pt-3 border-t border-sky-200 flex flex-col gap-2">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenLookup();
               }}
-              className="w-full py-2.5 bg-blue-50 text-blue-700 font-bold text-xs rounded-xl flex items-center justify-center gap-2"
+              className="w-full py-2.5 bg-sky-50 text-sky-900 font-bold text-xs rounded border border-sky-200 flex items-center justify-center gap-2"
             >
-              <Search className="w-4 h-4" />
-              <span>Find My Digital Bill & PDF</span>
+              <FileText className="w-4 h-4 text-sky-700" />
+              <span>Download Fee Receipt / Bill</span>
             </button>
             <a
               href={`tel:${settings.primaryPhone}`}
-              className="w-full py-2.5 bg-slate-100 text-slate-800 font-bold text-xs rounded-xl flex items-center justify-center gap-2"
+              className="w-full py-2.5 bg-white text-slate-900 font-bold text-xs rounded border border-sky-300 flex items-center justify-center gap-2"
             >
-              <Phone className="w-4 h-4 text-blue-600" />
+              <Phone className="w-4 h-4 text-slate-700" />
               <span>Call Office: {settings.primaryPhone}</span>
             </a>
           </div>
